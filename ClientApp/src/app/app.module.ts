@@ -10,6 +10,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TituloComponent } from './titulo/titulo.component';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 @NgModule({
    declarations: [
@@ -23,6 +25,8 @@ import { TituloComponent } from './titulo/titulo.component';
    ],
    imports: [
       BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+      BrowserAnimationsModule,
+      BsDropdownModule.forRoot(),
       HttpClientModule,
       FormsModule,
       RouterModule.forRoot([
