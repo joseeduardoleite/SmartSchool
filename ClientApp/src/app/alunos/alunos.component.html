@@ -1,49 +1,61 @@
-<div *ngIf="alunoSelecionado">
+<div class="row">
+  <div class="col-sm-6" *ngIf="alunoSelecionado">
+    <div class="row">
+      <div class="mr-auto">
+        <app-titulo [titulo]="'Cód. Aluno: ' + alunoSelecionado.id"></app-titulo>
+      </div>
+      <div class="mt-4">
+        <button class="btn btn-sm btn-outline-danger" (click)="voltar()">Fechar</button>
+      </div>
+    </div>
 
-  <div class="row">
-    <div class="mr-auto">
-      <app-titulo [titulo]="'Aluno: ' + alunoSelecionado"></app-titulo>
-    </div>
-    <div class="mt-1">
-      <button class="btn btn-warning" (click)="voltar()">Lista de Alunos</button>
-    </div>
+    <form [formGroup]="alunoForm" (submit)="alunoSubmit()">
+      <div class="form-group">
+        <label for="formGroupExampleInput">Nome</label>
+        <input type="text" formControlName="nome" class="form-control col-6">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Sobrenome</label>
+        <input type="text" formControlName="sobrenome" class="form-control col-6">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput3">Telefone</label>
+        <input type="text" formControlName="telefone" class="form-control col-6">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success" [disabled]="!alunoForm.valid">Enviar</button>
+      </div>
+    </form>
   </div>
-  
-  <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
-<div *ngIf="!alunoSelecionado">
-  <app-titulo [titulo]="titulo"></app-titulo>
-  <table class="table table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">Telefone</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let aluno of alunos" style="cursor: pointer;" (click)="alunoSelect(aluno)">
-        <th scope="row">{{aluno.id}}</th>
-        <td>{{aluno.nome}}</td>
-        <td>{{aluno.sobrenome}}</td>
-        <td>{{aluno.telefone}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div [ngClass]="{'col-sm-6': alunoSelecionado, 'col-sm-12': !alunoSelecionado}">
+    <app-titulo [titulo]="titulo"></app-titulo>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Visualizar</th>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunos">
+          <td><button (click)="alunoSelect(aluno)" class="btn btn-sm btn-warning">Detalhe</button></td>
+          <td scope="row">{{aluno.id}}</td>
+          <td>{{aluno.nome}}</td>
+          <td>{{aluno.sobrenome}}</td>
+          <td>{{aluno.telefone}}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-primary">Professores</button>
+              <button class="btn btn-sm btn-danger">Desativar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
