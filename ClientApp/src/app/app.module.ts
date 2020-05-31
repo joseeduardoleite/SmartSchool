@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TituloComponent } from './titulo/titulo.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
    declarations: [
@@ -30,13 +31,14 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      ModalModule.forRoot(),
       RouterModule.forRoot([
          { path: '', component: DashboardComponent, pathMatch: 'full' },
          { path: 'alunos', component: AlunosComponent },
          { path: 'professores', component: ProfessoresComponent },
          { path: 'perfil', component: PerfilComponent },
          { path: 'dashboard', component: DashboardComponent }
-      ])
+      ]),
    ],
    providers: [],
    bootstrap: [AppComponent]
