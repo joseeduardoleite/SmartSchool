@@ -43,14 +43,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let aluno of alunos">
-          <td><button (click)="alunoSelect(aluno)" class="btn btn-sm btn-warning">Detalhe</button></td>
+          <td><button (click)="alunoSelect(aluno)" class="text-dark btn btn-sm btn-warning">Detalhe</button></td>
           <td scope="row">{{aluno.id}}</td>
           <td>{{aluno.nome}}</td>
           <td>{{aluno.sobrenome}}</td>
           <td>{{aluno.telefone}}</td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-sm btn-primary">Professores</button>
+              <button (click)="openModal(template)" class="btn btn-sm btn-primary">Professores</button>
               <button class="btn btn-sm btn-danger">Desativar</button>
             </div>
           </td>
@@ -59,3 +59,14 @@
     </table>
   </div>
 </div>
+ 
+<ng-template #template>
+  <div class="modal-body">
+    <app-professores></app-professores>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn pull-right" aria-label="Close" (click)="modalRef.hide()">
+      Fechar
+    </button>
+  </div>
+</ng-template>
