@@ -5,7 +5,7 @@ namespace SmartSchool.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public int ProfessorId { get; set; }
-        public Professor Professor { get; set; }
+        public virtual Professor Professor { get; set; }
 
         public Disciplina() { }
 
