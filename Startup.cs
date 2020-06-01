@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartSchool.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace SmartSchool
 {
@@ -14,7 +17,10 @@ namespace SmartSchool
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -23,6 +29,14 @@ namespace SmartSchool
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+            var connectionString = Configuration.GetConnectionString("SmartSchoolDB");
+            services.AddDbContext<DataContext>(option =>
+                                                   option.UseLazyLoadingProxies()
+                                                   .UseMySql(connectionString, m => m.MigrationsAssembly("SmartSchool")));
+
             
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
