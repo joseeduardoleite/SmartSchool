@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartSchool.Data;
-using Microsoft.EntityFrameworkCore;
-
 
 namespace SmartSchool
 {
@@ -17,8 +16,8 @@ namespace SmartSchool
     {
         public Startup(IConfiguration configuration)
         {
-           var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("config.json", optional : false, reloadOnChange : true);
 
             Configuration = builder.Build();
         }
@@ -29,15 +28,17 @@ namespace SmartSchool
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddControllers();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
             var connectionString = Configuration.GetConnectionString("SmartSchoolDB");
-            services.AddDbContext<DataContext>(option =>
-                                                   option.UseLazyLoadingProxies()
-                                                   .UseMySql(connectionString, m => m.MigrationsAssembly("SmartSchool")));
 
-            
+            services.AddDbContext<DataContext>(
+                option => option.UseLazyLoadingProxies()
+                .UseMySql(connectionString, m => m.MigrationsAssembly("SmartSchool")));
+
+            services.AddScoped<IRepository, Repository>();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -58,7 +59,7 @@ namespace SmartSchool
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-//"https://localhost:5001;
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
