@@ -9,7 +9,7 @@ namespace SmartSchool.Data
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
-        public DbSet<AlunoDisciplina> AlunosDisciplinas { get; set; }
+        public DbSet<AlunoDisciplina> AlunoDisciplinas { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base (options) { }
         
