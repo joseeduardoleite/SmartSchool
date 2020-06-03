@@ -8,7 +8,7 @@ namespace SmartSchool.Models
         public string Nome { get; set; }
         public int ProfessorId { get; set; }
         public virtual Professor Professor { get; set; }
-        public IEnumerable<AlunoDisciplina> AlunosDisciplinas { get; set; }
+        public virtual IEnumerable<AlunoDisciplina> AlunoDisciplinas { get; set; }
 
         public Disciplina() { }
 

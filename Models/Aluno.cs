@@ -8,7 +8,7 @@ namespace SmartSchool.Models
         public string Nome { get; set; }
         public string SobreNome { get; set; }
         public string Telefone { get; set; }
-        public IEnumerable<AlunoDisciplina> AlunoDisciplinas { get; set; }
+        public virtual IEnumerable<AlunoDisciplina> AlunoDisciplinas { get; set; }
 
         public Aluno() { }
 
