@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SmartSchool.Models
 {
     public class Disciplina
@@ -6,15 +8,16 @@ namespace SmartSchool.Models
         public string Nome { get; set; }
         public int ProfessorId { get; set; }
         public virtual Professor Professor { get; set; }
+        public IEnumerable<AlunoDisciplina> AlunosDisciplinas { get; set; }
 
         public Disciplina() { }
 
-        public Disciplina(int id, string nome, int professorId) 
+        public Disciplina(int id, string nome, int professorId)
         {
             this.Id = id;
             this.Nome = nome;
             this.ProfessorId = professorId;
-               
+
         }
     }
 }
