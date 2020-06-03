@@ -8,8 +8,8 @@ using SmartSchool.Data;
 namespace SmartSchool.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200601211455_init")]
-    partial class init
+    [Migration("20200603190451_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,7 +101,7 @@ namespace SmartSchool.Migrations
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("AlunosDisciplinas");
+                    b.ToTable("AlunoDisciplinas");
 
                     b.HasData(
                         new
@@ -316,13 +316,13 @@ namespace SmartSchool.Migrations
             modelBuilder.Entity("SmartSchool.Models.AlunoDisciplina", b =>
                 {
                     b.HasOne("SmartSchool.Models.Aluno", "Aluno")
-                        .WithMany()
+                        .WithMany("AlunoDisciplinas")
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SmartSchool.Models.Disciplina", "Disciplina")
-                        .WithMany()
+                        .WithMany("AlunoDisciplinas")
                         .HasForeignKey("DisciplinaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartSchool.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,7 @@ namespace SmartSchool.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AlunosDisciplinas",
+                name: "AlunoDisciplinas",
                 columns: table => new
                 {
                     AlunoId = table.Column<int>(nullable: false),
@@ -64,15 +64,15 @@ namespace SmartSchool.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlunosDisciplinas", x => new { x.AlunoId, x.DisciplinaId });
+                    table.PrimaryKey("PK_AlunoDisciplinas", x => new { x.AlunoId, x.DisciplinaId });
                     table.ForeignKey(
-                        name: "FK_AlunosDisciplinas_Alunos_AlunoId",
+                        name: "FK_AlunoDisciplinas_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AlunosDisciplinas_Disciplinas_DisciplinaId",
+                        name: "FK_AlunoDisciplinas_Disciplinas_DisciplinaId",
                         column: x => x.DisciplinaId,
                         principalTable: "Disciplinas",
                         principalColumn: "Id",
@@ -118,7 +118,7 @@ namespace SmartSchool.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AlunosDisciplinas",
+                table: "AlunoDisciplinas",
                 columns: new[] { "AlunoId", "DisciplinaId" },
                 values: new object[,]
                 {
@@ -148,8 +148,8 @@ namespace SmartSchool.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunosDisciplinas_DisciplinaId",
-                table: "AlunosDisciplinas",
+                name: "IX_AlunoDisciplinas_DisciplinaId",
+                table: "AlunoDisciplinas",
                 column: "DisciplinaId");
 
             migrationBuilder.CreateIndex(
@@ -161,7 +161,7 @@ namespace SmartSchool.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AlunosDisciplinas");
+                name: "AlunoDisciplinas");
 
             migrationBuilder.DropTable(
                 name: "Alunos");

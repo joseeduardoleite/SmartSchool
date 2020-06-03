@@ -99,7 +99,7 @@ namespace SmartSchool.Migrations
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("AlunosDisciplinas");
+                    b.ToTable("AlunoDisciplinas");
 
                     b.HasData(
                         new
@@ -314,13 +314,13 @@ namespace SmartSchool.Migrations
             modelBuilder.Entity("SmartSchool.Models.AlunoDisciplina", b =>
                 {
                     b.HasOne("SmartSchool.Models.Aluno", "Aluno")
-                        .WithMany()
+                        .WithMany("AlunoDisciplinas")
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SmartSchool.Models.Disciplina", "Disciplina")
-                        .WithMany()
+                        .WithMany("AlunoDisciplinas")
                         .HasForeignKey("DisciplinaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
