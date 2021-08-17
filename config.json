@@ -1,5 +1,5 @@
 {
     "ConnectionStrings": {
-      "SmartSchoolDB": "server=localhost; port=3306; uid=root; pwd=admin; database=SmartSchoolDB;"
+      "SmartSchoolDB": ""
     }
   }
